@@ -8,13 +8,17 @@
         <variable
             name="num"
             type="Integer" />
+        <variable
+            name="clickListener"
+            type="com.example.advancedrecyclerviewdemo2023.MyListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/teal_200"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:onClick="@{() -> clickListener.onClick(num)}">
 
         <TextView
             android:id="@+id/number"
