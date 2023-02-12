@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class NumberListAdapter(var data: List<Int>) :
-    RecyclerView.Adapter<NumberListAdapter.IntViewHolder>() {
+class NumberListAdapter() :
+    ListAdapter<Int,NumberListAdapter.IntViewHolder>(RowItemDiffCallback())  {
 
     class IntViewHolder(val row: View): RecyclerView.ViewHolder(row) {
         val textView: TextView = row.findViewById(R.id.number)
@@ -20,11 +22,18 @@ class NumberListAdapter(var data: List<Int>) :
     }
 
     override fun onBindViewHolder(holder: IntViewHolder, position: Int) {
-        holder.textView.text = data.get(position).toString()
+        holder.textView.text = getItem(position).toString()
+    }
+}
+
+class RowItemDiffCallback : DiffUtil.ItemCallback<Int>() {
+
+    override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
+        return oldItem == newItem
     }
 
-    override fun getItemCount() = data.size
-
-
-
+    override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
+        return oldItem == newItem
+    }
 }
+

@@ -1,18 +1,21 @@
 package com.example.advancedrecyclerviewdemo2023
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.advancedrecyclerviewdemo2023.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val adapter = NumberListAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.rv.adapter = adapter
+        binding.rv.layoutManager = LinearLayoutManager(this)
 
-        val rv: RecyclerView = findViewById(R.id.rv)
-        rv.layoutManager = LinearLayoutManager(this)
+        adapter.submitList(IntRange(0,100).toList())
 
-        rv.adapter = NumberListAdapter(IntRange(0,100).toList())
     }
 }
